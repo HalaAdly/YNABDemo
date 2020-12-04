@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'kotlin-platform-android'
 }
 
 android {
@@ -22,7 +23,11 @@ android {
         buildConfigField "String", "USER_ACCESS_TOKEN", "\"c4a863bef01f7c18659bcb6a2c94f0aaacdcea882f3b8bd0fbf93260c2eebd34\""
 
     }
-
+    buildFeatures{
+        dataBinding = true
+        // for view binding :
+        // viewBinding = true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -35,6 +40,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures{
+        viewBinding = true
     }
 }
 
