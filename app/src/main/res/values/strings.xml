@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">YNABDemo</string>
-    <string name="title_home">Home</string>
+    <string name="title_budget">Budget</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="no_internet">Please check your internet connection</string>
     <string name="no_data">No Data to display</string>
     <string name="network_error">Network error, could get data,please try again!</string>
+    <string name="date_from_to">From %1$s to %2$s</string>
 </resources>

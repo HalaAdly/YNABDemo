@@ -40,20 +40,33 @@
                     android:text="@{item.name}"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
-                    tools:text="budgetss title ........... this is a sample text " />
+                    tools:text="budgetss title " />
+
 
                 <TextView
-                    android:id="@+id/tv_caption"
+                    android:id="@+id/tv_dates"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_8x"
                     android:maxLines="2"
-
-                    android:text="@{item.lastModifiedOn}"
+                    android:text="@{@string/date_from_to(item.firstMonth,item.lastMonth)}"
                     android:textColor="@android:color/black"
                     app:layout_constraintLeft_toRightOf="@+id/tv_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Here’s what you need to know to start your day." />
+                    tools:text="12/12/1234 12/12/5678" />
+
+                <TextView
+                    android:id="@+id/tv_modified"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:gravity="end"
+                    android:maxLines="2"
+                    app:bindServerDate="@{item.lastModifiedOn}"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="12/12/1234 12/12/5678" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

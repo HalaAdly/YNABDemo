@@ -12,7 +12,9 @@ interface Service {
     @GET("budgets")
     suspend fun fetchUserBudgets(): Response<BudgetsResponse>
 
-
+    @GET("budgets/{budget_id}")
+    suspend fun fetchBudgetDetails(@Path("budget_id") budgetId: String)
+            : Response<BudgetsResponse>
 
 
 }

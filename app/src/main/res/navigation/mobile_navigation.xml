@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.hm.ynabdemo.ui.budget.BudgetFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_budget"
         tools:layout="@layout/fragment_home" />
 
     <fragment
