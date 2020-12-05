@@ -13,7 +13,7 @@ import com.hm.ynabdemo.ui.budget.BudgetViewModel
 
 class BudgetssAdapter(
     private val budgetListViewModel: BudgetViewModel,
-    private val recipes: List<BudgetItem>
+    private val budgetss: List<BudgetItem>
 ) : RecyclerView.Adapter<BudgetViewHolder>() {
 
     private val onItemClickListener: RecyclerItemListener = object : RecyclerItemListener {
@@ -29,11 +29,11 @@ class BudgetssAdapter(
     }
 
     override fun onBindViewHolder(holder: BudgetViewHolder, position: Int) {
-        holder.bind(recipes[position], onItemClickListener)
+        holder.bind(budgetss[position], onItemClickListener)
     }
 
     override fun getItemCount(): Int {
-        return recipes.size
+        return budgetss.size
     }
 }
 

@@ -3,6 +3,7 @@ package com.hm.ynabdemo.data.remote
 import com.hm.ynabdemo.data.Resource
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
 import com.hm.ynabdemo.data.dto.budgets.Budgets
+import com.hm.ynabdemo.data.dto.budgets.BudgetsResponse
 import com.hm.ynabdemo.data.error.*
 import com.hm.ynabdemo.utils.NetworkConnectivity
 
@@ -16,13 +17,14 @@ import javax.inject.Inject
  */
 
 class RemoteData @Inject
-constructor(private val serviceGenerator: ServiceGenerator, private val networkConnectivity: NetworkConnectivity) : RemoteDataSource {
+constructor(private val serviceGenerator: ServiceGenerator,
+            private val networkConnectivity: NetworkConnectivity) : RemoteDataSource {
 
     override suspend fun requestBudgets(): Resource<Budgets> {
-        val recipesService = serviceGenerator.createService(Service::class.java)
-        return when (val response = processCall(recipesService::fetchUserBudgets)) {
-            is List<*> -> {
-                Resource.Success(data = Budgets(response as ArrayList<BudgetItem>))
+        val service = serviceGenerator.createService(Service::class.java)
+        return when (val response = processCall(service::fetchUserBudgets)) {
+            is BudgetsResponse -> {
+                Resource.Success(data = Budgets(response.data?.budgets))
             }
             else -> {
                 Resource.DataError(errorCode = response as Int)

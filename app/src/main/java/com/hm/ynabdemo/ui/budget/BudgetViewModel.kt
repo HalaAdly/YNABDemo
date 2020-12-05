@@ -1,20 +1,76 @@
 package com.hm.ynabdemo.ui.budget
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hm.ynabdemo.data.DataRepository
+import com.hm.ynabdemo.data.DataRepositorySource
+import com.hm.ynabdemo.data.Resource
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
+import com.hm.ynabdemo.data.dto.budgets.Budgets
+import com.hm.ynabdemo.ui.base.BaseViewModel
+import com.hm.ynabdemo.utils.SingleEvent
+import com.hm.ynabdemo.utils.wrapEspressoIdlingResource
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 class BudgetViewModel @Inject constructor(
-    private val repo: DataRepository
-) : ViewModel() {
-fun openBudgetDetails(item: BudgetItem) {
+    private val repo: DataRepositorySource
+) : BaseViewModel() {
+    fun openBudgetDetails(item: BudgetItem) {
 
-}
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
     }
-    val text: LiveData<String> = _text
+
+    /**
+     * Data --> LiveData, Exposed as LiveData, Locally in viewModel as MutableLiveData
+     */
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    val budgetsLiveDataPrivate = MutableLiveData<Resource<Budgets>>()
+    val budgetsLiveData: LiveData<Resource<Budgets>> get() = budgetsLiveDataPrivate
+
+
+    /**
+     * UI actions as event, user action is single one time event, Shouldn't be multiple time consumption
+     */
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    private val openBudgetsDetailsPrivate = MutableLiveData<SingleEvent<BudgetItem>>()
+    val openDetails: LiveData<SingleEvent<BudgetItem>> get() = openBudgetsDetailsPrivate
+
+    /**
+     * Error handling as UI
+     */
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    private val showSnackBarPrivate = MutableLiveData<SingleEvent<Any>>()
+    val showSnackBar: LiveData<SingleEvent<Any>> get() = showSnackBarPrivate
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    private val showToastPrivate = MutableLiveData<SingleEvent<Any>>()
+    val showToast: LiveData<SingleEvent<Any>> get() = showToastPrivate
+
+
+    fun getBudgets() {
+        viewModelScope.launch {
+            budgetsLiveDataPrivate.value = Resource.Loading()
+            wrapEspressoIdlingResource {
+                repo.requestBudgets().collect {
+                    budgetsLiveDataPrivate.value = it
+                }
+            }
+        }
+    }
+
+    fun openBudgetsDetails(budgets: BudgetItem) {
+        openBudgetsDetailsPrivate.value = SingleEvent(budgets)
+    }
+
+    fun showToastMessage(errorCode: Int) {
+        val error = errorManager.getError(errorCode)
+        showToastPrivate.value = SingleEvent(error.description)
+    }
+
+
 }

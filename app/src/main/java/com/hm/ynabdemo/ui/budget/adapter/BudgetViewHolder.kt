@@ -13,7 +13,7 @@ class BudgetViewHolder(private val itemBinding: BudgetItemBinding) :
 
     fun bind(item: BudgetItem, recyclerItemListener: RecyclerItemListener) {
         itemBinding.item = item
-        itemBinding.rlRecipeItem.setOnClickListener {
+        itemBinding.rlBudgetsItem.setOnClickListener {
             recyclerItemListener.onItemSelected(
                 item
             )
