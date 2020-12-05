@@ -3,7 +3,8 @@ package com.hm.ynabdemo.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hm.ynabdemo.ui.ViewModelFactory
-import com.hm.ynabdemo.ui.budget.BudgetViewModel
+import com.hm.ynabdemo.ui.home.budget.BudgetViewModel
+import com.hm.ynabdemo.ui.budgetDetails.BudgetDetailsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -22,6 +23,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BudgetViewModel::class)
     abstract fun bindBudgetViewModel(viewModel: BudgetViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BudgetDetailsViewModel::class)
+    abstract fun bindBudgetDetailsViewModel(viewModel: BudgetDetailsViewModel): ViewModel
 
 
 }

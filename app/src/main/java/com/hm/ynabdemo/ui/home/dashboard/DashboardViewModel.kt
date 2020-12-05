@@ -1,4 +1,4 @@
-package com.hm.ynabdemo.ui.dashboard
+package com.hm.ynabdemo.ui.home.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

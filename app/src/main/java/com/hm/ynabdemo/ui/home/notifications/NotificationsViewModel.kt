@@ -1,4 +1,4 @@
-package com.hm.ynabdemo.ui.notifications
+package com.hm.ynabdemo.ui.home.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

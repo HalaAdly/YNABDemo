@@ -1,11 +1,11 @@
-package com.hm.ynabdemo.ui.budget.adapter
+package com.hm.ynabdemo.ui.home.budget.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
 import com.hm.ynabdemo.databinding.BudgetItemBinding
-import com.hm.ynabdemo.ui.budget.BudgetViewModel
+import com.hm.ynabdemo.ui.home.budget.BudgetViewModel
 
 /**
  * Created by HalaAdly

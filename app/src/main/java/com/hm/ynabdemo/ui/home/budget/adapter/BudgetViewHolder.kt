@@ -1,4 +1,4 @@
-package com.hm.ynabdemo.ui.budget.adapter
+package com.hm.ynabdemo.ui.home.budget.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem

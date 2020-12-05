@@ -1,8 +1,7 @@
 package com.hm.ynabdemo.di
 
 
-import com.hm.ynabdemo.MainActivity
-import com.hm.ynabdemo.ui.budget.BudgetFragment
+import com.hm.ynabdemo.ui.home.budget.BudgetFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

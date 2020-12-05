@@ -1,11 +1,9 @@
-package com.hm.ynabdemo.ui.budget
+package com.hm.ynabdemo.ui.home.budget
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hm.ynabdemo.data.DataRepository
 import com.hm.ynabdemo.data.DataRepositorySource
 import com.hm.ynabdemo.data.Resource
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
@@ -15,14 +13,13 @@ import com.hm.ynabdemo.utils.SingleEvent
 import com.hm.ynabdemo.utils.wrapEspressoIdlingResource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 class BudgetViewModel @Inject constructor(
     private val repo: DataRepositorySource
 ) : BaseViewModel() {
     fun openBudgetDetails(item: BudgetItem) {
-
+        openBudgetsDetailsPrivate.value = SingleEvent(item)
     }
 
     /**
