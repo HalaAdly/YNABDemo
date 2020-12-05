@@ -1,9 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'kotlin-platform-android'
+    id 'kotlin-android-extensions'
+
 }
 
 android {
@@ -45,8 +46,11 @@ android {
     buildFeatures{
         viewBinding = true
     }
-}
 
+}
+androidExtensions {
+    experimental = true
+}
 dependencies {
 
     implementation "androidx.multidex:multidex:$multidex_version"

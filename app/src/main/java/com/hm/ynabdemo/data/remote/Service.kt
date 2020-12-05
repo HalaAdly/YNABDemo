@@ -1,6 +1,8 @@
 package com.hm.ynabdemo.data.remote
 
 
+import com.hm.ynabdemo.data.dto.budgetDetails.BudgetDetailsData
+import com.hm.ynabdemo.data.dto.budgetDetails.BudgetDetailsResponse
 import com.hm.ynabdemo.data.dto.budgets.BudgetsResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,7 +16,7 @@ interface Service {
 
     @GET("budgets/{budget_id}")
     suspend fun fetchBudgetDetails(@Path("budget_id") budgetId: String)
-            : Response<BudgetsResponse>
+            : Response<BudgetDetailsResponse>
 
 
 }

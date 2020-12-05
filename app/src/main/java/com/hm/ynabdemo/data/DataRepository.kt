@@ -1,6 +1,7 @@
 package com.hm.ynabdemo.data
 
 
+import com.hm.ynabdemo.data.dto.budgetDetails.BudgetDetailsItem
 import com.hm.ynabdemo.data.dto.budgets.Budgets
 import com.hm.ynabdemo.data.remote.RemoteData
 import kotlinx.coroutines.flow.Flow
@@ -20,6 +21,12 @@ class DataRepository @Inject constructor(private val remoteRepository: RemoteDat
     override suspend fun requestBudgets(): Flow<Resource<Budgets>> {
         return flow {
             emit(remoteRepository.requestBudgets())
+        }.flowOn(ioDispatcher)
+    }
+
+    override suspend fun requestBudgetDetails(id: String): Flow<Resource<BudgetDetailsItem>> {
+        return flow {
+            emit(remoteRepository.requestBudgetDetails(id))
         }.flowOn(ioDispatcher)
     }
 

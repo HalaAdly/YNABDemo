@@ -3,7 +3,7 @@ package com.hm.ynabdemo.data.dto.shared
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
+import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class CurrencyFormat : Parcelable {

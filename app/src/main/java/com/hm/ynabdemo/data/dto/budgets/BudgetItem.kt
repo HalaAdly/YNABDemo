@@ -1,14 +1,14 @@
 package com.hm.ynabdemo.data.dto.budgets
 
+import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.hm.ynabdemo.data.dto.shared.CurrencyFormat
 import com.hm.ynabdemo.data.dto.shared.DateFormat
-import kotlinx.parcelize.Parcelize
+import kotlinx.android.parcel.Parcelize
 
-@Parcelize
-class BudgetItem : Parcelable {
+class BudgetItem() : Parcelable {
     @SerializedName("id")
     @Expose
     var id: String? = null
@@ -37,7 +37,39 @@ class BudgetItem : Parcelable {
     @Expose
     var currencyFormat: CurrencyFormat? = null
 
+    constructor(parcel: Parcel) : this() {
+        id = parcel.readString()
+        name = parcel.readString()
+        lastModifiedOn = parcel.readString()
+        firstMonth = parcel.readString()
+        lastMonth = parcel.readString()
+        dateFormat = parcel.readParcelable(DateFormat::class.java.classLoader)
+        currencyFormat = parcel.readParcelable(CurrencyFormat::class.java.classLoader)
+    }
 
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(name)
+        parcel.writeString(lastModifiedOn)
+        parcel.writeString(firstMonth)
+        parcel.writeString(lastMonth)
+        parcel.writeParcelable(dateFormat, flags)
+        parcel.writeParcelable(currencyFormat, flags)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<BudgetItem> {
+        override fun createFromParcel(parcel: Parcel): BudgetItem {
+            return BudgetItem(parcel)
+        }
+
+        override fun newArray(size: Int): Array<BudgetItem?> {
+            return arrayOfNulls(size)
+        }
+    }
 
 
 }
