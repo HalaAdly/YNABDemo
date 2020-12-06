@@ -1,4 +1,4 @@
-package com.hm.ynabdemo.ui.home.budget
+package com.hm.ynabdemo.ui.budgetDetails.accounts
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class BudgetViewModel @Inject constructor(
+class AccountViewModel @Inject constructor(
     private val repo: DataRepositorySource
 ) : BaseViewModel() {
     fun openBudgetDetails(item: BudgetItem) {
@@ -54,7 +54,6 @@ class BudgetViewModel @Inject constructor(
     fun openBudgetsDetails(budgets: BudgetItem) {
         openBudgetsDetailsPrivate.value = SingleEvent(budgets)
     }
-
 
 
 

@@ -59,11 +59,11 @@ class BudgetDetailsItem {
 
     @SerializedName("category_groups")
     @Expose
-    var categoryGroups: List<CategoryGroup>? = null
+    var categoryGroups: ArrayList<CategoryGroup>? = null
 
     @SerializedName("categories")
     @Expose
-    var categories: List<Category>? = null
+    var categories: ArrayList<Category>? = null
 
     @SerializedName("months")
     @Expose

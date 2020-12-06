@@ -6,7 +6,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.hm.ynabdemo.data.dto.shared.CurrencyFormat
 import com.hm.ynabdemo.data.dto.shared.DateFormat
-import kotlinx.android.parcel.Parcelize
 
 class BudgetItem() : Parcelable {
     @SerializedName("id")

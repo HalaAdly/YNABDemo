@@ -15,44 +15,20 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class BudgetDetailsViewModel @Inject constructor(
-    private val repo: DataRepositorySource
-) : BaseViewModel() {
+class BudgetDetailsViewModel @Inject constructor() : BaseViewModel() {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     val itemPrivate = MutableLiveData<BudgetItem>()
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    val itemDetailsPrivate = MutableLiveData<Resource<BudgetDetailsItem>>()
-    val itemDetails: LiveData<Resource<BudgetDetailsItem>> get() = itemDetailsPrivate
-
-    /**
-     * Error handling as UI
-     */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    private val showSnackBarPrivate = MutableLiveData<SingleEvent<Any>>()
-    val showSnackBar: LiveData<SingleEvent<Any>> get() = showSnackBarPrivate
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    private val showToastPrivate = MutableLiveData<SingleEvent<Any>>()
-    val showToast: LiveData<SingleEvent<Any>> get() = showToastPrivate
 
     fun initIntentData(item: BudgetItem) {
         itemPrivate.value = item
     }
 
-    fun showToastMessage(errorCode: Int) {
-        val error = errorManager.getError(errorCode)
-        showToastPrivate.value = SingleEvent(error.description)
+    fun getId(): String {
+        val id = itemPrivate.value?.id
+        return id ?: ""
     }
 
-    fun getDetails() {
-        viewModelScope.launch {
-            itemDetailsPrivate.value = Resource.Loading()
-            wrapEspressoIdlingResource {
-                repo.requestBudgetDetails(itemPrivate.value?.id!!).collect {
-                    itemDetailsPrivate.value = it
-                }
-            }
-        }
+    fun getName(): String? {
+        return itemPrivate.value?.name
     }
 }

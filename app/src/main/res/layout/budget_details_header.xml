@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.hm.ynabdemo.data.dto.budgetDetails.category.CategoryGroup" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/rl_budgets_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/space_1x"
+        app:cardUseCompatPadding="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/space_8x"
+            android:layout_marginTop="@dimen/space_4x"
+            android:layout_marginBottom="@dimen/space_4x"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="@{item.name}"
+                android:textColor="@color/design_default_color_secondary_variant"
+                android:textStyle="bold"
+                tools:text="budgetss title " />
+
+            <TextView
+                android:id="@+id/tv_budget"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/budgeted"
+                android:textColor="@color/design_default_color_secondary_variant"
+                tools:text="0" />
+
+            <TextView
+                android:id="@+id/tv_avilable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/available"
+                android:textColor="@color/design_default_color_secondary_variant"
+                tools:text="0" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -1,4 +1,4 @@
-package com.hm.ynabdemo.ui.home.budget
+package com.hm.ynabdemo.ui.budgetDetails.accounts
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,18 +15,18 @@ import com.hm.ynabdemo.data.dto.budgets.Budgets
 import com.hm.ynabdemo.databinding.FragmentHomeBinding
 import com.hm.ynabdemo.ui.ViewModelFactory
 import com.hm.ynabdemo.ui.base.BaseFragment
-import com.hm.ynabdemo.ui.home.budget.adapter.BudgetssAdapter
 import com.hm.ynabdemo.ui.budgetDetails.BudgetDetailsActivity
+import com.hm.ynabdemo.ui.budgetDetails.accounts.adapter.AccountsAdapter
 import com.hm.ynabdemo.utils.*
 import javax.inject.Inject
 
-class BudgetFragment : BaseFragment() {
+class AccountFragment : BaseFragment() {
 
-    private lateinit var adapter: BudgetssAdapter
+    private lateinit var adapter: AccountsAdapter
     private lateinit var binding: FragmentHomeBinding
 
     @Inject
-    lateinit var budgetViewModel: BudgetViewModel
+    lateinit var budgetViewModel: AccountViewModel
 
     override fun initializeViewModel() {
 //        budgetViewModel = viewModelFactory.create(BudgetViewModel::class.java)
@@ -64,7 +64,7 @@ class BudgetFragment : BaseFragment() {
 
     private fun bindListData(budgets: Budgets) {
         if (!(budgets.list.isNullOrEmpty())) {
-            adapter = BudgetssAdapter(budgetViewModel, budgets.list)
+            adapter = AccountsAdapter(budgetViewModel, budgets.list)
             binding.rvList.adapter = adapter
             showDataView(true)
         } else {
@@ -98,7 +98,7 @@ class BudgetFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var budgetAdapter: BudgetssAdapter
+    private lateinit var budgetAdapter: AccountsAdapter
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

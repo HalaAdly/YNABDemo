@@ -5,24 +5,13 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
+class Category : CategoryBase() {
 
-
-class Category {
-    @SerializedName("id")
-    @Expose
-    var id: String? = null
 
     @SerializedName("category_group_id")
     @Expose
     var categoryGroupId: String? = null
 
-    @SerializedName("name")
-    @Expose
-    var name: String? = null
-
-    @SerializedName("hidden")
-    @Expose
-    var hidden: Boolean? = null
 
     @SerializedName("original_category_group_id")
     @Expose
@@ -34,7 +23,7 @@ class Category {
 
     @SerializedName("budgeted")
     @Expose
-    var budgeted: Int? = null
+    var budgeted: String? = null
 
     @SerializedName("activity")
     @Expose
@@ -42,7 +31,7 @@ class Category {
 
     @SerializedName("balance")
     @Expose
-    var balance: Int? = null
+    var balance: String? = null
 
     @SerializedName("goal_type")
     @Expose
@@ -64,7 +53,4 @@ class Category {
     @Expose
     var goalPercentageComplete: Int? = null
 
-    @SerializedName("deleted")
-    @Expose
-    var deleted: Boolean? = null
 }
