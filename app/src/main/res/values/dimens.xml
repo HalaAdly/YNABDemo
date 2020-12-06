@@ -4,7 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="space_1x">1dp</dimen>
     <dimen name="space_8x">8dp</dimen>
-    <dimen name="space_4x">8dp</dimen>
+    <dimen name="space_4x">4dp</dimen>
     <dimen name="space_16x">16dp</dimen>
     <dimen name="space_24x">24dp</dimen>
     <dimen name="font_16x">16sp</dimen>
