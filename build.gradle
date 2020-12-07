@@ -38,7 +38,7 @@ ext {
     runnerVersion = '1.3.0'
     espressoVersion = '3.3.0'
     coreTestingVersion = '2.1.0'
-    coroutinesTestVersion = '1.3.2'
+    coroutinesTestVersion = '1.4.2'
     recyclerviewVersion = '1.1.0'
     appcompatVersion='1.2.0'
     materialVersion='1.3.0-alpha02'

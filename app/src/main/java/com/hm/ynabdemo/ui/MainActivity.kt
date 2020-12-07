@@ -1,7 +1,8 @@
-package com.hm.ynabdemo
+package com.hm.ynabdemo.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.hm.ynabdemo.R
 
 class MainActivity : AppCompatActivity() {
 

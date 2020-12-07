@@ -26,7 +26,7 @@ android {
         buildConfigField "String", "USER_ACCESS_TOKEN", "\"c4a863bef01f7c18659bcb6a2c94f0aaacdcea882f3b8bd0fbf93260c2eebd34\""
 
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
         // for view binding :
         // viewBinding = true
@@ -44,10 +44,39 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
-
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    packagingOptions {
+        pickFirst 'META-INF/kotlinx-io.kotlin_module'
+        pickFirst 'META-INF/atomicfu.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-core.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-io.kotlin_module'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+    android {
+        sourceSets {
+            String sharedTestDir = 'src/sharedTest/resources'
+            test {
+                resources.srcDirs += sharedTestDir
+            }
+            androidTest {
+                resources.srcDirs += sharedTestDir
+            }
+        }
+    }
 }
 androidExtensions {
     experimental = true
@@ -100,13 +129,14 @@ dependencies {
     //junit 5
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+//    testImplementation "androidx.fragment:fragment-testing:$fragment_version"
 
     testImplementation "org.junit.platform:junit-platform-runner:$junitRunnerVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidXJunitVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertjVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoIntentsVersion"
-    androidTestImplementation ("androidx.test.espresso:espresso-core:$espressoCoreVersion",{
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoCoreVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation "androidx.test:rules:$testRulesVersion"
