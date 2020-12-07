@@ -56,14 +56,26 @@
                     tools:text="12/12/1234 12/12/5678" />
 
                 <TextView
+                    android:id="@+id/tv_currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:maxLines="2"
+                    android:textColor="@android:color/black"
+                    app:bindCurrency="@{item.currencyFormat}"
+                    app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="$" />
+
+                <TextView
                     android:id="@+id/tv_modified"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_8x"
                     android:gravity="end"
                     android:maxLines="2"
-                    app:bindServerDate="@{item.lastModifiedOn}"
                     android:textColor="@android:color/black"
+                    app:bindServerDate="@{item.lastModifiedOn}"
                     app:layout_constraintLeft_toRightOf="@+id/tv_name"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="12/12/1234 12/12/5678" />

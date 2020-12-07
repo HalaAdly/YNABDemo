@@ -8,6 +8,7 @@ import com.hm.ynabdemo.data.dto.shared.CurrencyFormat
 import com.hm.ynabdemo.data.dto.shared.DateFormat
 
 class BudgetItem() : Parcelable {
+
     @SerializedName("id")
     @Expose
     var id: String? = null
