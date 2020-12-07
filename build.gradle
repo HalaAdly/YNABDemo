@@ -63,7 +63,7 @@ ext {
     lifecycleExtensionsVersion ='2.2.0'
     kotlinVersion ='1.4.0'
     annotationVersion ='1.1.0'
-    RETROFIT_VERSION ='1.6.0'
+    RETROFIT_VERSION ='2.5.0'
     converter_gson ='2.9.0'
      multidex_version = "2.0.1"
 }
