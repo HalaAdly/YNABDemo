@@ -16,4 +16,12 @@
     <string name="budgeted">Budgeted</string>
     <string name="available">Available</string>
     <string name="select_a_budget_to_view_details">Select a budget to view details</string>
+    <string name="write_a_name">Write a name</string>
+    <string name="write_the_balance">Write the balance</string>
+    <string name="choose_type">Choose Type</string>
+    <string name="create_account">Create Account</string>
+    <string-array name="account_types">
+        <item>Cash</item>
+        <item>Credit</item>
+    </string-array>
 </resources>
