@@ -4,8 +4,11 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.hm.ynabdemo.R
 import com.hm.ynabdemo.data.dto.shared.CurrencyFormat
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.min
+import kotlin.math.pow
 
 
 class BindingAdapters {
@@ -38,6 +41,37 @@ class BindingAdapters {
             }
         }
 
+        /**
+         * Converts a milliunits amount to a currency amount
+         * @param milliunits - The milliunits amount (i.e. 293294)
+         * @param [currencyDecimalDigits] - The number of decimals in the currency (i.e. 2 for USD)
+         */
+        @JvmStatic
+        @BindingAdapter("mapBalance")
+        fun TextView.mapBalance(milliunits: String) {
+            text = if (milliunits.isNotEmpty() && milliunits.matches("-?\\d+(\\.\\d+)?".toRegex()))
+                context.getString(
+                    R.string.balance,
+                    convertMilliUnitsToCurrencyAmount(milliunits.toDouble(), 2.toDouble())
+                )
+            else
+                context.getString(R.string.balance, "")
+        }
+
+        //the api returns balance in milliunits this is to format it to ###,###.##
+
+        @JvmStatic
+        fun convertMilliUnitsToCurrencyAmount(
+            milliunits: Double, currencyDecimalDigits: Double
+        ): String {
+            var numberToRoundTo =
+                10.toDouble().pow(3 - min(3.toDouble(), currencyDecimalDigits))
+            numberToRoundTo = 1 / numberToRoundTo
+            val rounded = Math.round(milliunits * numberToRoundTo) / numberToRoundTo
+            val currencyAmount = rounded * (0.1 / 10.toDouble().pow(2.toDouble()))
+            val decimalFormat = DecimalFormat("###,###.##")
+            return decimalFormat.format(currencyAmount)
+        }
 
     }
 

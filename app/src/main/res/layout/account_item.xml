@@ -63,7 +63,7 @@
                     android:layout_marginTop="@dimen/space_8x"
                     android:gravity="end"
                     android:maxLines="2"
-                    android:text="@{@string/balance(item.balance)}"
+                    app:mapBalance="@{item.balance}"
                     android:textColor="@android:color/black"
                     app:layout_constraintLeft_toRightOf="@+id/tv_name"
                     app:layout_constraintTop_toTopOf="parent"
