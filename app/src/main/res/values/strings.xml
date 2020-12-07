@@ -20,6 +20,7 @@
     <string name="write_the_balance">Write the balance</string>
     <string name="choose_type">Choose Type</string>
     <string name="create_account">Create Account</string>
+    <string name="not_implemented">Not Implemented</string>
     <string-array name="account_types">
         <item>Cash</item>
         <item>Credit</item>
