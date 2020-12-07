@@ -58,6 +58,20 @@ class BindingAdapters {
                 context.getString(R.string.balance, "")
         }
 
+        /**
+         * Converts a milliunits amount to a currency amount
+         * @param milliunits - The milliunits amount (i.e. 293294)
+         * @param [currencyDecimalDigits] - The number of decimals in the currency (i.e. 2 for USD)
+         */
+        @JvmStatic
+        @BindingAdapter("mapValue")
+        fun TextView.mapValue(milliunits: String) {
+            text = if (milliunits.isNotEmpty() && milliunits.matches("-?\\d+(\\.\\d+)?".toRegex()))
+                convertMilliUnitsToCurrencyAmount(milliunits.toDouble(), 2.toDouble())
+            else
+                ""
+        }
+
         //the api returns balance in milliunits this is to format it to ###,###.##
 
         @JvmStatic

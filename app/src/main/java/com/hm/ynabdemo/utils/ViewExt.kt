@@ -6,9 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.PrecomputedTextCompat
@@ -47,15 +45,7 @@ fun View.toInvisible() {
  */
 fun View.showSnackbar(snackbarText: String, timeLength: Int) {
     Snackbar.make(this, snackbarText, timeLength).run {
-        addCallback(object : Snackbar.Callback() {
-            override fun onShown(sb: Snackbar?) {
-                EspressoIdlingResource.increment()
-            }
 
-            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                EspressoIdlingResource.decrement()
-            }
-        })
         show()
     }
 }

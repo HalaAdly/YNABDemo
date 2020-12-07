@@ -18,7 +18,6 @@ import dagger.android.AndroidInjection
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected abstract fun initializeViewModel()
     abstract fun observeViewModel()
     protected abstract fun initViewBinding()
 
@@ -26,7 +25,6 @@ abstract class BaseActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         initViewBinding()
-        initializeViewModel()
         observeViewModel()
     }
     protected fun observeToast(event: LiveData<SingleEvent<Any>>, binding: ViewBinding) {

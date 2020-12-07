@@ -25,10 +25,6 @@ class BudgetDetailsFragment : BaseFragment() {
     @Inject
     lateinit var budgetViewModel: BudgetDetailsFragmentViewModel
 
-    override fun initializeViewModel() {
-//        budgetViewModel = viewModelFactory.create(BudgetViewModel::class.java)
-    }
-
 
     override fun observeViewModel() {
         observe(budgetViewModel.itemDetails, ::handleDetails)

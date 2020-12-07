@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.hm.ynabdemo.BUDGET_ITEM_KEY
 import com.hm.ynabdemo.data.Resource
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
@@ -15,8 +13,8 @@ import com.hm.ynabdemo.data.dto.budgets.Budgets
 import com.hm.ynabdemo.databinding.FragmentHomeBinding
 import com.hm.ynabdemo.ui.ViewModelFactory
 import com.hm.ynabdemo.ui.base.BaseFragment
-import com.hm.ynabdemo.ui.home.budget.adapter.BudgetssAdapter
 import com.hm.ynabdemo.ui.budgetDetails.BudgetDetailsActivity
+import com.hm.ynabdemo.ui.home.budget.adapter.BudgetssAdapter
 import com.hm.ynabdemo.utils.*
 import javax.inject.Inject
 
@@ -28,9 +26,6 @@ class BudgetFragment : BaseFragment() {
     @Inject
     lateinit var budgetViewModel: BudgetViewModel
 
-    override fun initializeViewModel() {
-//        budgetViewModel = viewModelFactory.create(BudgetViewModel::class.java)
-    }
 
 
     override fun observeViewModel() {

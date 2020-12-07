@@ -25,10 +25,6 @@ class BudgetDetailsActivity : BaseActivity(),
     lateinit var viewModel: BudgetDetailsViewModel
 
 
-    //    private lateinit var binding: ActivityBudgetDetailsBinding
-    override fun initializeViewModel() {
-
-    }
 
     override fun observeViewModel() {
 

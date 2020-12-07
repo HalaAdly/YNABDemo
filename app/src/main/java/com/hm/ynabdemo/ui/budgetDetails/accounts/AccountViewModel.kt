@@ -11,7 +11,7 @@ import com.hm.ynabdemo.data.dto.accounts.Accounts
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
 import com.hm.ynabdemo.ui.base.BaseViewModel
 import com.hm.ynabdemo.utils.SingleEvent
-import com.hm.ynabdemo.utils.wrapEspressoIdlingResource
+
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -48,11 +48,11 @@ class AccountViewModel @Inject constructor(
     fun getAccounts() {
         viewModelScope.launch {
             accountsLiveDataPrivate.value = Resource.Loading()
-            wrapEspressoIdlingResource {
-                repo.requestAccounts(itemPrivate.value!!).collect {
-                    accountsLiveDataPrivate.value = it
-                }
+
+            repo.requestAccounts(itemPrivate.value!!).collect {
+                accountsLiveDataPrivate.value = it
             }
+
         }
     }
 

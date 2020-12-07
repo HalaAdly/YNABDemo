@@ -18,7 +18,6 @@ import dagger.android.support.AndroidSupportInjection
 
 abstract class BaseFragment : Fragment() {
 
-    protected abstract fun initializeViewModel()
     abstract fun observeViewModel()
     protected abstract fun initViewBinding()
 
@@ -26,7 +25,6 @@ abstract class BaseFragment : Fragment() {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         initViewBinding()
-        initializeViewModel()
 
     }
 

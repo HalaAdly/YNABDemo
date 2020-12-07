@@ -20,7 +20,6 @@ import com.hm.ynabdemo.DataStatus
 import com.hm.ynabdemo.R
 import com.hm.ynabdemo.TestUtil.dataStatus
 import com.hm.ynabdemo.ui.budgetDetails.BudgetDetailsActivity
-import com.hm.ynabdemo.utils.EspressoIdlingResource
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.not
 import org.junit.After
@@ -42,7 +41,6 @@ class MainActivityTest {
 
     @Before
     fun setup() {
-        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
     }
 
     @Test

@@ -10,7 +10,7 @@ import com.hm.ynabdemo.data.dto.budgets.BudgetItem
 import com.hm.ynabdemo.data.dto.budgets.Budgets
 import com.hm.ynabdemo.ui.base.BaseViewModel
 import com.hm.ynabdemo.utils.SingleEvent
-import com.hm.ynabdemo.utils.wrapEspressoIdlingResource
+
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,11 +43,10 @@ class BudgetViewModel @Inject constructor(
     fun getBudgets() {
         viewModelScope.launch {
             budgetsLiveDataPrivate.value = Resource.Loading()
-            wrapEspressoIdlingResource {
                 repo.requestBudgets().collect {
                     budgetsLiveDataPrivate.value = it
                 }
-            }
+
         }
     }
 

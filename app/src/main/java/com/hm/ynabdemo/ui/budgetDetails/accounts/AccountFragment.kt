@@ -29,9 +29,6 @@ class AccountFragment : BaseFragment() {
     @Inject
     lateinit var accountViewModel: AccountViewModel
 
-    override fun initializeViewModel() {
-//        budgetViewModel = viewModelFactory.create(BudgetViewModel::class.java)
-    }
 
 
     override fun observeViewModel() {

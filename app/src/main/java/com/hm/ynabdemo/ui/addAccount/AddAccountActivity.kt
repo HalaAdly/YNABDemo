@@ -8,9 +8,7 @@ import com.task.ui.base.BaseActivity
 
 class AddAccountActivity : BaseActivity() {
     lateinit var binding: ActivityAddAccountBinding
-    override fun initializeViewModel() {
 
-    }
 
     override fun observeViewModel() {
     }
