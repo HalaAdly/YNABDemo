@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hm.ynabdemo.R
 import com.hm.ynabdemo.data.Resource
 import com.hm.ynabdemo.data.dto.budgetDetails.BudgetDetailsItem
-import com.hm.ynabdemo.data.dto.budgetDetails.category.CategoryBase
 import com.hm.ynabdemo.databinding.FragmentBudgetSummaryBinding
 import com.hm.ynabdemo.ui.ViewModelFactory
 import com.hm.ynabdemo.ui.base.BaseFragment
@@ -54,18 +53,10 @@ class BudgetDetailsFragment : BaseFragment() {
     }
 
     private fun bindData(budget: BudgetDetailsItem) {
-        if (budget.id != null) {
-            if (!(budget.categoryGroups.isNullOrEmpty())) {
-                val data = ArrayList<CategoryBase>()
-                for (cat in budget.categoryGroups!!) {
-                    data.add(cat)
-                    budget.categories?.filter {
-                        it.categoryGroupId.equals(cat.id!!)
-                    }?.let { data.addAll(it) }
-                }
-                val adapter = BudgetDetailsAdapter(data)
-                binding.rvList.adapter = adapter
-            }
+        if (!budget.categoryGroups.isNullOrEmpty()) {
+            val data = budgetViewModel.getUpdatedList(budget)
+            val adapter = BudgetDetailsAdapter(data)
+            binding.rvList.adapter = adapter
             showDataView(true)
         } else {
             showDataView(false)

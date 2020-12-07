@@ -7,10 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.hm.ynabdemo.data.DataRepositorySource
 import com.hm.ynabdemo.data.Resource
 import com.hm.ynabdemo.data.dto.budgetDetails.BudgetDetailsItem
-import com.hm.ynabdemo.data.dto.budgets.BudgetItem
-import com.hm.ynabdemo.data.dto.budgets.Budgets
+import com.hm.ynabdemo.data.dto.budgetDetails.category.CategoryBase
 import com.hm.ynabdemo.ui.base.BaseViewModel
-import com.hm.ynabdemo.utils.SingleEvent
 import com.hm.ynabdemo.utils.wrapEspressoIdlingResource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -39,6 +37,17 @@ class BudgetDetailsFragmentViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun getUpdatedList(budget: BudgetDetailsItem): ArrayList<CategoryBase> {
+        val data = ArrayList<CategoryBase>()
+        for (cat in budget.categoryGroups!!) {
+            data.add(cat)
+            budget.categories?.filter {
+                it.categoryGroupId.equals(cat.id!!)
+            }?.let { data.addAll(it) }
+        }
+        return data
     }
 
 

@@ -64,7 +64,8 @@ class AccountFragment : BaseFragment() {
 
     private fun bindListData(data: Accounts) {
         if (!(data.list.isNullOrEmpty())) {
-            adapter = AccountsAdapter(accountViewModel, data.list)
+            val dataList = accountViewModel.getSortedData(data.list)
+            adapter = AccountsAdapter(accountViewModel, dataList)
             binding.rvList.adapter = adapter
             showDataView(true)
         } else {

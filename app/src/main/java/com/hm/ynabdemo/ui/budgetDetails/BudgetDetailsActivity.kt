@@ -18,6 +18,7 @@ import com.task.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_budget_details.*
 import javax.inject.Inject
 
+
 class BudgetDetailsActivity : BaseActivity(),
     BottomNavigationView.OnNavigationItemSelectedListener {
     @Inject
@@ -39,13 +40,13 @@ class BudgetDetailsActivity : BaseActivity(),
     }
 
     lateinit var navController: NavController
-
+    lateinit var navView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_budget_details)
         viewModel.initIntentData(intent.getParcelableExtra(BUDGET_ITEM_KEY) ?: BudgetItem())
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val navView: BottomNavigationView = nav_view
+        navView = nav_view
 
         navController = findNavController(R.id.nav_host_fragment)
 //
@@ -93,11 +94,19 @@ class BudgetDetailsActivity : BaseActivity(),
             }
             R.id.navigation_accounts -> {
                 bundle = AccountFragmentArgs(viewModel.getId()).toBundle()
-
             }
         }
 
         navController.navigate(fragmentId, bundle)
         return true
+    }
+
+    //handle back to first fragment then finish to stop it from looping through fragments
+    override fun onBackPressed() {
+        if (navView.selectedItemId == R.id.navigation_details) {
+            finish()
+        } else {
+            navView.selectedItemId = R.id.navigation_details
+        }
     }
 }

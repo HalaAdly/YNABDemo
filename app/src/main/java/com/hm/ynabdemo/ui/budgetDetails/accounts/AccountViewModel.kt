@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hm.ynabdemo.data.DataRepositorySource
 import com.hm.ynabdemo.data.Resource
+import com.hm.ynabdemo.data.dto.accounts.AccountItem
 import com.hm.ynabdemo.data.dto.accounts.Accounts
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
 import com.hm.ynabdemo.ui.base.BaseViewModel
@@ -57,6 +58,11 @@ class AccountViewModel @Inject constructor(
 
     fun initIntentData(budgetID: String) {
         itemPrivate.value = budgetID
+    }
+
+    fun getSortedData(list: ArrayList<AccountItem>): List<AccountItem> {
+        return list.filter { it.deleted == false }
+            .sortedByDescending { it.balance }
     }
 
 }
