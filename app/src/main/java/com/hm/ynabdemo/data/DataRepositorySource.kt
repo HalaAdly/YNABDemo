@@ -1,9 +1,9 @@
 package com.hm.ynabdemo.data
 
 
+import com.hm.ynabdemo.data.dto.accounts.Accounts
 import com.hm.ynabdemo.data.dto.budgetDetails.BudgetDetailsItem
 import com.hm.ynabdemo.data.dto.budgets.Budgets
-import com.hm.ynabdemo.data.dto.budgets.BudgetsResponse
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.Flow
 interface DataRepositorySource {
 
     suspend fun requestBudgets(): Flow<Resource<Budgets>>
-    suspend fun requestBudgetDetails(id: String): Flow<Resource<BudgetDetailsItem>>
-//    suspend fun doLogin(loginRequest: LoginRequest): Flow<Resource<LoginResponse>>
-//    suspend fun addToFavourite(id: String): Flow<Resource<Boolean>>
+    suspend fun requestBudgetDetails(budgetId: String): Flow<Resource<BudgetDetailsItem>>
+    suspend fun requestAccounts(budgetId: String): Flow<Resource<Accounts>>
+
 
 }

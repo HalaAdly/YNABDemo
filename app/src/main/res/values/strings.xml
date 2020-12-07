@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">YNABDemo</string>
     <string name="budget_id">budget_id</string>
-    <string name="title_budget">Budget</string>
+    <string name="title_budget">Budget List</string>
     <string name="title_budget_det">Budget Details</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_accounts">Accounts</string>

@@ -1,23 +1,23 @@
 package com.hm.ynabdemo.ui.budgetDetails.accounts.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.hm.ynabdemo.data.dto.budgets.BudgetItem
-import com.hm.ynabdemo.databinding.BudgetItemBinding
+import com.hm.ynabdemo.data.dto.accounts.AccountItem
+import com.hm.ynabdemo.databinding.AccountItemBinding
 
 /**
  * Created by HalaAdly
  */
 
-class AccountViewHolder(private val itemBinding: BudgetItemBinding) :
+class AccountViewHolder(private val itemBinding: AccountItemBinding) :
     RecyclerView.ViewHolder(itemBinding.root) {
 
-    fun bind(item: BudgetItem, recyclerItemListener: RecyclerItemListener) {
+    fun bind(item: AccountItem, recyclerItemListener: RecyclerItemListener) {
         itemBinding.item = item
-        itemBinding.rlBudgetsItem.setOnClickListener {
-            recyclerItemListener.onItemSelected(
-                item
-            )
-        }
+//        itemBinding.rlBudgetsItem.setOnClickListener {
+//            recyclerItemListener.onItemSelected(
+//                item
+//            )
+//        }
     }
 }
 

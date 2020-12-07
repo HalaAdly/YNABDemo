@@ -6,18 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hm.ynabdemo.BUDGET_ITEM_KEY
+import com.hm.ynabdemo.R
 import com.hm.ynabdemo.data.Resource
 import com.hm.ynabdemo.data.dto.budgetDetails.BudgetDetailsItem
 import com.hm.ynabdemo.data.dto.budgetDetails.category.CategoryBase
-import com.hm.ynabdemo.data.dto.budgets.BudgetItem
 import com.hm.ynabdemo.databinding.FragmentBudgetSummaryBinding
-import com.hm.ynabdemo.databinding.FragmentHomeBinding
 import com.hm.ynabdemo.ui.ViewModelFactory
 import com.hm.ynabdemo.ui.base.BaseFragment
 import com.hm.ynabdemo.ui.budgetDetails.budgetdetails.adapter.BudgetDetailsAdapter
-import com.hm.ynabdemo.ui.home.budget.adapter.BudgetssAdapter
-import com.hm.ynabdemo.utils.*
+import com.hm.ynabdemo.utils.observe
+import com.hm.ynabdemo.utils.toGone
+import com.hm.ynabdemo.utils.toVisible
 import javax.inject.Inject
 
 class BudgetDetailsFragment : BaseFragment() {
@@ -38,6 +37,10 @@ class BudgetDetailsFragment : BaseFragment() {
         observeToast(budgetViewModel.showToast, binding)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
 
     private fun handleDetails(status: Resource<BudgetDetailsItem>) {
         when (status) {
@@ -90,6 +93,14 @@ class BudgetDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         budgetViewModel.initIntentData(args.StringBudgetId)
+        arguments?.let {
+            if (!it.getString(getString(R.string.budget_id), "").isNullOrEmpty())
+                budgetViewModel.initIntentData(
+                    it.getString(
+                        getString(R.string.budget_id), ""
+                    )
+                )
+        }
         budgetViewModel.getDetails()
     }
 
@@ -104,6 +115,7 @@ class BudgetDetailsFragment : BaseFragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvList.layoutManager = layoutManager
         binding.rvList.setHasFixedSize(true)
+
         return view
     }
 }

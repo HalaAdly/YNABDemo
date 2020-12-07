@@ -3,8 +3,9 @@ package com.hm.ynabdemo.ui.budgetDetails.accounts.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.hm.ynabdemo.data.dto.accounts.AccountItem
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
-import com.hm.ynabdemo.databinding.BudgetItemBinding
+import com.hm.ynabdemo.databinding.AccountItemBinding
 import com.hm.ynabdemo.ui.budgetDetails.accounts.AccountViewModel
 
 
@@ -13,8 +14,8 @@ import com.hm.ynabdemo.ui.budgetDetails.accounts.AccountViewModel
  */
 
 class AccountsAdapter(
-        private val budgetListViewModel: AccountViewModel,
-        private val budgetss: List<BudgetItem>
+    private val budgetListViewModel: AccountViewModel,
+    private val list: List<AccountItem>
 ) : RecyclerView.Adapter<AccountViewHolder>() {
 
     private val onItemClickListener: RecyclerItemListener = object : RecyclerItemListener {
@@ -25,16 +26,16 @@ class AccountsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountViewHolder {
         val itemBinding =
-            BudgetItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            AccountItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AccountViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
-        holder.bind(budgetss[position], onItemClickListener)
+        holder.bind(list[position], onItemClickListener)
     }
 
     override fun getItemCount(): Int {
-        return budgetss.size
+        return list.size
     }
 }
 

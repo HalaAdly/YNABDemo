@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.hm.ynabdemo.BUDGET_ITEM_KEY
+import com.hm.ynabdemo.R
 import com.hm.ynabdemo.data.Resource
+import com.hm.ynabdemo.data.dto.accounts.Accounts
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
-import com.hm.ynabdemo.data.dto.budgets.Budgets
-import com.hm.ynabdemo.databinding.FragmentHomeBinding
+import com.hm.ynabdemo.databinding.FragmentAccountsBinding
 import com.hm.ynabdemo.ui.ViewModelFactory
 import com.hm.ynabdemo.ui.base.BaseFragment
 import com.hm.ynabdemo.ui.budgetDetails.BudgetDetailsActivity
@@ -23,10 +23,10 @@ import javax.inject.Inject
 class AccountFragment : BaseFragment() {
 
     private lateinit var adapter: AccountsAdapter
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentAccountsBinding
 
     @Inject
-    lateinit var budgetViewModel: AccountViewModel
+    lateinit var accountViewModel: AccountViewModel
 
     override fun initializeViewModel() {
 //        budgetViewModel = viewModelFactory.create(BudgetViewModel::class.java)
@@ -34,37 +34,37 @@ class AccountFragment : BaseFragment() {
 
 
     override fun observeViewModel() {
-        observe(budgetViewModel.budgetsLiveData, ::handleList)
-        observeEvent(budgetViewModel.openDetails, ::navigateToDetailsScreen)
-        observeSnackBarMessages(budgetViewModel.showSnackBar, binding)
-        observeToast(budgetViewModel.showToast, binding)
+        observe(accountViewModel.accountsLiveData, ::handleList)
+        observeEvent(accountViewModel.openDetails, ::navigateToDetailsScreen)
+        observeSnackBarMessages(accountViewModel.showSnackBar, binding)
+        observeToast(accountViewModel.showToast, binding)
     }
 
     private fun navigateToDetailsScreen(navigateEvent: SingleEvent<BudgetItem>) {
         navigateEvent.getContentIfNotHandled()?.let {
             val nextScreenIntent =
-                    Intent(requireContext(), BudgetDetailsActivity::class.java).apply {
-                        putExtra(BUDGET_ITEM_KEY, it)
-                    }
+                Intent(requireContext(), BudgetDetailsActivity::class.java).apply {
+                    putExtra(BUDGET_ITEM_KEY, it)
+                }
             startActivity(nextScreenIntent)
         }
     }
 
 
-    private fun handleList(status: Resource<Budgets>) {
+    private fun handleList(status: Resource<Accounts>) {
         when (status) {
             is Resource.Loading -> showLoadingView()
-            is Resource.Success -> status.data?.let { bindListData(budgets = it) }
+            is Resource.Success -> status.data?.let { bindListData(it) }
             is Resource.DataError -> {
                 showDataView(false)
-                status.errorCode?.let { budgetViewModel.showToastMessage(it) }
+                status.errorCode?.let { accountViewModel.showToastMessage(it) }
             }
         }
     }
 
-    private fun bindListData(budgets: Budgets) {
-        if (!(budgets.list.isNullOrEmpty())) {
-            adapter = AccountsAdapter(budgetViewModel, budgets.list)
+    private fun bindListData(data: Accounts) {
+        if (!(data.list.isNullOrEmpty())) {
+            adapter = AccountsAdapter(accountViewModel, data.list)
             binding.rvList.adapter = adapter
             showDataView(true)
         } else {
@@ -85,24 +85,40 @@ class AccountFragment : BaseFragment() {
     }
 
     override fun initViewBinding() {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentAccountsBinding.inflate(layoutInflater)
+    }
+
+    val args: AccountFragmentArgs by navArgs()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvList.layoutManager = layoutManager
         binding.rvList.setHasFixedSize(true)
-        budgetViewModel.getBudgets()
+        accountViewModel.initIntentData(args.StringBudgetId)
+        arguments?.let {
+            if (!it.getString(getString(R.string.budget_id), "").isNullOrEmpty())
+                accountViewModel.initIntentData(
+                    it.getString(
+                        getString(R.string.budget_id), ""
+                    )
+                )
+        }
+        accountViewModel.getAccounts()
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var budgetAdapter: AccountsAdapter
+    private lateinit var accountsAdapter: AccountsAdapter
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val view = binding.root
 

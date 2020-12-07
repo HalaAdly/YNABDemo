@@ -1,6 +1,7 @@
 package com.hm.ynabdemo.data
 
 
+import com.hm.ynabdemo.data.dto.accounts.Accounts
 import com.hm.ynabdemo.data.dto.budgetDetails.BudgetDetailsItem
 import com.hm.ynabdemo.data.dto.budgets.Budgets
 import com.hm.ynabdemo.data.remote.RemoteData
@@ -15,7 +16,10 @@ import kotlin.coroutines.CoroutineContext
  * Created by HalaAdly
  */
 
-class DataRepository @Inject constructor(private val remoteRepository: RemoteData, private val ioDispatcher: CoroutineContext) :
+class DataRepository @Inject constructor(
+    private val remoteRepository: RemoteData,
+    private val ioDispatcher: CoroutineContext
+) :
     DataRepositorySource {
 
     override suspend fun requestBudgets(): Flow<Resource<Budgets>> {
@@ -27,6 +31,12 @@ class DataRepository @Inject constructor(private val remoteRepository: RemoteDat
     override suspend fun requestBudgetDetails(id: String): Flow<Resource<BudgetDetailsItem>> {
         return flow {
             emit(remoteRepository.requestBudgetDetails(id))
+        }.flowOn(ioDispatcher)
+    }
+
+    override suspend fun requestAccounts(budgetId: String): Flow<Resource<Accounts>> {
+        return flow {
+            emit(remoteRepository.fetchUserAccountForBudget(budgetId))
         }.flowOn(ioDispatcher)
     }
 
