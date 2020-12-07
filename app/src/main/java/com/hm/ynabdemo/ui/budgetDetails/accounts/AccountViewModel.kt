@@ -40,6 +40,10 @@ class AccountViewModel @Inject constructor(
     private val openBudgetsDetailsPrivate = MutableLiveData<SingleEvent<BudgetItem>>()
     val openDetails: LiveData<SingleEvent<BudgetItem>> get() = openBudgetsDetailsPrivate
 
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    private val openAddAccountPrivate = MutableLiveData<SingleEvent<String>>()
+    val openAddAccount: LiveData<SingleEvent<String>> get() = openAddAccountPrivate
+
 
     fun getAccounts() {
         viewModelScope.launch {
@@ -52,7 +56,11 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    fun openBudgetsDetails(budgets: BudgetItem) {
+    fun openAddAccount(budgetID: String) {
+        openAddAccountPrivate.value = SingleEvent(budgetID)
+    }
+
+    fun openAccountDetails(budgets: BudgetItem) {
         openBudgetsDetailsPrivate.value = SingleEvent(budgets)
     }
 
@@ -63,6 +71,11 @@ class AccountViewModel @Inject constructor(
     fun getSortedData(list: ArrayList<AccountItem>): List<AccountItem> {
         return list.filter { it.deleted == false }
             .sortedByDescending { it.balance }
+    }
+
+    fun getBudgetID(): String {
+        val id = itemPrivate.value
+        return id ?: ""
     }
 
 }

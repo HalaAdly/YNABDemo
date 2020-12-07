@@ -14,6 +14,7 @@ import com.hm.ynabdemo.data.dto.accounts.Accounts
 import com.hm.ynabdemo.data.dto.budgets.BudgetItem
 import com.hm.ynabdemo.databinding.FragmentAccountsBinding
 import com.hm.ynabdemo.ui.ViewModelFactory
+import com.hm.ynabdemo.ui.addAccount.AddAccountActivity
 import com.hm.ynabdemo.ui.base.BaseFragment
 import com.hm.ynabdemo.ui.budgetDetails.BudgetDetailsActivity
 import com.hm.ynabdemo.ui.budgetDetails.accounts.adapter.AccountsAdapter
@@ -36,6 +37,7 @@ class AccountFragment : BaseFragment() {
     override fun observeViewModel() {
         observe(accountViewModel.accountsLiveData, ::handleList)
         observeEvent(accountViewModel.openDetails, ::navigateToDetailsScreen)
+        observeEvent(accountViewModel.openAddAccount, ::navigateToAddAccountScreen)
         observeSnackBarMessages(accountViewModel.showSnackBar, binding)
         observeToast(accountViewModel.showToast, binding)
     }
@@ -89,6 +91,16 @@ class AccountFragment : BaseFragment() {
         binding = FragmentAccountsBinding.inflate(layoutInflater)
     }
 
+    private fun navigateToAddAccountScreen(navigateEvent: SingleEvent<String>) {
+        navigateEvent.getContentIfNotHandled()?.let {
+            val nextScreenIntent =
+                Intent(requireContext(), AddAccountActivity::class.java).apply {
+                    putExtra(BUDGET_ITEM_KEY, it)
+                }
+            startActivity(nextScreenIntent)
+        }
+    }
+
     val args: AccountFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +121,9 @@ class AccountFragment : BaseFragment() {
                         getString(R.string.budget_id), ""
                     )
                 )
+        }
+        binding.btnAddAccount.setOnClickListener {
+            accountViewModel.openAddAccount(accountViewModel.getBudgetID())
         }
         accountViewModel.getAccounts()
     }
