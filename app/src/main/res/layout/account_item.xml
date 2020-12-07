@@ -11,77 +11,72 @@
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/rl_budgets_item"
+        android:id="@+id/rl_accounts_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="@dimen/space_1x"
         app:cardUseCompatPadding="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/space_8x">
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/space_8x"
+            android:layout_marginTop="@dimen/space_8x"
+            android:orientation="vertical"
+            android:padding="@dimen/space_8x"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/space_8x"
+                android:maxLines="1"
+                android:text="@{item.name}"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                tools:text="budgetss title " />
+
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_8x"
-                android:orientation="vertical"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="@{item.name}"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    tools:text="budgetss title " />
+                android:maxLines="2"
+                android:text="@{item.type}"
+                android:textColor="@android:color/black"
+                app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="12/12/1234 12/12/5678" />
 
 
-                <TextView
-                    android:id="@+id/tv_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:maxLines="2"
-                    android:text="@{item.type}"
-                    android:textColor="@android:color/black"
-                    app:layout_constraintLeft_toRightOf="@+id/tv_name"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="12/12/1234 12/12/5678" />
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8x"
+                android:gravity="end"
+                android:maxLines="2"
+                android:textColor="@android:color/black"
+                app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:mapBalance="@{item.balance}"
+                tools:text="budget" />
 
-
-                <TextView
-                    android:id="@+id/balance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:gravity="end"
-                    android:maxLines="2"
-                    app:mapBalance="@{item.balance}"
-                    android:textColor="@android:color/black"
-                    app:layout_constraintLeft_toRightOf="@+id/tv_name"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="budget" />
-
-                <TextView
-                    android:id="@+id/on_budget"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:gravity="end"
-                    android:maxLines="2"
-                    android:text="@{@string/on_budget(item.onBudget)}"
-                    android:textColor="@android:color/black"
-                    app:layout_constraintLeft_toRightOf="@+id/tv_name"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="budget" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/on_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8x"
+                android:gravity="end"
+                android:maxLines="2"
+                android:text="@{@string/on_budget(item.onBudget)}"
+                android:textColor="@android:color/black"
+                app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="budget" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

@@ -13,11 +13,11 @@ class AccountViewHolder(private val itemBinding: AccountItemBinding) :
 
     fun bind(item: AccountItem, recyclerItemListener: RecyclerItemListener) {
         itemBinding.item = item
-//        itemBinding.rlBudgetsItem.setOnClickListener {
-//            recyclerItemListener.onItemSelected(
-//                item
-//            )
-//        }
+        itemBinding.rlAccountsItem.setOnClickListener {
+            recyclerItemListener.onItemSelected(
+                item
+            )
+        }
     }
 }
 

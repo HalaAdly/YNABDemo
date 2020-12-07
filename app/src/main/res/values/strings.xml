@@ -12,6 +12,8 @@
     <string name="date_from_to">From %1$s to %2$s</string>
     <string name="currency_name">Currency : %1$s</string>
     <string name="on_budget">On Budget : %1$s</string>
+    <string name="closed">Closed : %1$s</string>
+    <string name="note">Note :</string>
     <string name="balance">Balance : %1$s</string>
     <string name="budgeted">Budgeted</string>
     <string name="available">Available</string>

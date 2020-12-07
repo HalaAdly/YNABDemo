@@ -36,11 +36,11 @@ class AccountItem() : Parcelable {
 
     @SerializedName("cleared_balance")
     @Expose
-    var clearedBalance: Int? = null
+    var clearedBalance: String? = null
 
     @SerializedName("uncleared_balance")
     @Expose
-    var unclearedBalance: Int? = null
+    var unclearedBalance: String? = null
 
     @SerializedName("transfer_payee_id")
     @Expose
@@ -58,8 +58,8 @@ class AccountItem() : Parcelable {
         closed = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
         note = parcel.readString()
         balance = parcel.readString()
-        clearedBalance = parcel.readValue(Int::class.java.classLoader) as? Int
-        unclearedBalance = parcel.readValue(Int::class.java.classLoader) as? Int
+        clearedBalance = parcel.readString()
+        unclearedBalance = parcel.readString()
         transferPayeeId = parcel.readString()
         deleted = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
     }
@@ -72,8 +72,8 @@ class AccountItem() : Parcelable {
         parcel.writeValue(closed)
         parcel.writeString(note)
         parcel.writeString(balance)
-        parcel.writeValue(clearedBalance)
-        parcel.writeValue(unclearedBalance)
+        parcel.writeString(clearedBalance)
+        parcel.writeString(unclearedBalance)
         parcel.writeString(transferPayeeId)
         parcel.writeValue(deleted)
     }

@@ -7,16 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hm.ynabdemo.ACCOUNT_ITEM_KEY
 import com.hm.ynabdemo.BUDGET_ITEM_KEY
 import com.hm.ynabdemo.R
 import com.hm.ynabdemo.data.Resource
+import com.hm.ynabdemo.data.dto.accounts.AccountItem
 import com.hm.ynabdemo.data.dto.accounts.Accounts
-import com.hm.ynabdemo.data.dto.budgets.BudgetItem
 import com.hm.ynabdemo.databinding.FragmentAccountsBinding
 import com.hm.ynabdemo.ui.ViewModelFactory
+import com.hm.ynabdemo.ui.accountDetails.AccountDetailsActivity
 import com.hm.ynabdemo.ui.addAccount.AddAccountActivity
 import com.hm.ynabdemo.ui.base.BaseFragment
-import com.hm.ynabdemo.ui.budgetDetails.BudgetDetailsActivity
 import com.hm.ynabdemo.ui.budgetDetails.accounts.adapter.AccountsAdapter
 import com.hm.ynabdemo.utils.*
 import javax.inject.Inject
@@ -39,11 +40,11 @@ class AccountFragment : BaseFragment() {
         observeToast(accountViewModel.showToast, binding)
     }
 
-    private fun navigateToDetailsScreen(navigateEvent: SingleEvent<BudgetItem>) {
+    private fun navigateToDetailsScreen(navigateEvent: SingleEvent<AccountItem>) {
         navigateEvent.getContentIfNotHandled()?.let {
             val nextScreenIntent =
-                Intent(requireContext(), BudgetDetailsActivity::class.java).apply {
-                    putExtra(BUDGET_ITEM_KEY, it)
+                Intent(requireContext(), AccountDetailsActivity::class.java).apply {
+                    putExtra(ACCOUNT_ITEM_KEY, it)
                 }
             startActivity(nextScreenIntent)
         }

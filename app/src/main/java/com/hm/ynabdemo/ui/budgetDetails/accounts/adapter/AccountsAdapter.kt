@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hm.ynabdemo.data.dto.accounts.AccountItem
-import com.hm.ynabdemo.data.dto.budgets.BudgetItem
 import com.hm.ynabdemo.databinding.AccountItemBinding
 import com.hm.ynabdemo.ui.budgetDetails.accounts.AccountViewModel
 
@@ -14,13 +13,13 @@ import com.hm.ynabdemo.ui.budgetDetails.accounts.AccountViewModel
  */
 
 class AccountsAdapter(
-    private val budgetListViewModel: AccountViewModel,
+    private val accountListViewModel: AccountViewModel,
     private val list: List<AccountItem>
 ) : RecyclerView.Adapter<AccountViewHolder>() {
 
     private val onItemClickListener: RecyclerItemListener = object : RecyclerItemListener {
-        override fun onItemSelected(item: BudgetItem) {
-            budgetListViewModel.openBudgetDetails(item)
+        override fun onItemSelected(item: AccountItem) {
+            accountListViewModel.openAccountDetails(item)
         }
     }
 

@@ -1,7 +1,7 @@
 package com.hm.ynabdemo.ui.budgetDetails.accounts.adapter
 
-import com.hm.ynabdemo.data.dto.budgets.BudgetItem
+import com.hm.ynabdemo.data.dto.accounts.AccountItem
 
 interface RecyclerItemListener {
-    fun onItemSelected(budgets : BudgetItem)
+    fun onItemSelected(budgets: AccountItem)
 }

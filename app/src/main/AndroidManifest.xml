@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YNABDemo">
+        <activity android:name=".ui.accountDetails.AccountDetailsActivity"></activity>
         <activity android:name=".ui.addAccount.AddAccountActivity" />
         <activity
             android:name=".ui.budgetDetails.BudgetDetailsActivity"
